@@ -17,7 +17,7 @@ while op != 0:
             email = input('digite o email valido')
             senha = input('digite sua senha')
 
-            if email in ['@', '.com'] and naotem_email not in email:
+            if '@' in email and '.com' in email and '$' not in email and '%' not in email and '&' not in email and '#' not in email and ' ' not in email :
                 usr.append({
                     'nome': nome,
                     'email': email,
