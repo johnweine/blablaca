@@ -1,7 +1,5 @@
-tem_email= ['@' '.com']
-naotem_email = ['$', '%', '&','#',' ']
 usr = []
-senha = []
+
 
 op= 99
 while op != 0:
@@ -27,5 +25,8 @@ while op != 0:
                 print('Usuario cadastrado com sucesso')
                 break
             else:
-                print('email invalido por favor digite novamente email e senha para validação')
+                print('email invalido por favor digite novamente o email e senha para validação')
                 continue
+        if op == 2:
+
+
