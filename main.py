@@ -34,7 +34,7 @@ while op != 0:
                 email_val = input('digite seu email:')
                 senha_val = input('digite sua senha:')
                 for usuario_cada in usr:
-                    if usuario_cada['email'] == email_val and usage_msg['senha'] == senha_val:
+                    if usuario_cada['email'] == email_val and usuario_cada['senha'] == senha_val:
                         print('login realizado com sucesso')
                     else:
                         print('email e senha errado')
