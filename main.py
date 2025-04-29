@@ -1,3 +1,5 @@
+
+
 usr = []
 
 
@@ -15,7 +17,7 @@ while op != 0:
             email = input('digite o email valido')
             senha = input('digite sua senha')
 
-            if '@' in email and '.com' in email and '$' not in email and '%' not in email and '&' not in email and '#' not in email and ' ' not in email :
+            if '@' in email and '.com' in email and '$' not in email and '%' not in email and '&' not in email and '#' not in email and ' ' not in email:
                 usr.append({
                     'nome': nome,
                     'email': email,
@@ -28,5 +30,15 @@ while op != 0:
                 print('email invalido por favor digite novamente o email e senha para validação')
                 continue
         if op == 2:
+            while True:
+                email_val = input('digite seu email:')
+                senha_val = input('digite sua senha:')
+                for usuario_cada in usr:
+                    if usuario_cada['email'] == email_val and usage_msg['senha'] == senha_val:
+                        print('login realizado com sucesso')
+                    else:
+                        print('email e senha errado')
+                    print(f'diga seu nome {['nome']} bem vi')
+
 
 
