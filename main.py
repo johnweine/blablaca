@@ -1,9 +1,11 @@
-
-
-usr = []
+usr = [{'nome': 'john',
+        'email': 'john@gmail.com',
+        'senha' : '123'
+        }]
 
 
 op= 99
+
 while op != 0:
     print('----------MENU---------')
     print('1-Cadastrar usurario ')
@@ -31,14 +33,15 @@ while op != 0:
                 continue
         if op == 2:
             while True:
+                op2 = 99
                 email_val = input('digite seu email:')
                 senha_val = input('digite sua senha:')
                 for usuario_cada in usr:
                     if usuario_cada['email'] == email_val and usuario_cada['senha'] == senha_val:
                         print('login realizado com sucesso')
+                        # while op2 != 0:
                     else:
                         print('email e senha errado')
-                    print(f'diga seu nome {['nome']} bem vi')
 
 
 
