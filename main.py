@@ -39,8 +39,7 @@ while op != 0:
                     else:
                         print('email e senha errado')
                     print(f'diga seu nome {['nome']} bem vi')
-        if op == 3:
-            print('op 3')
+
 
 
 
