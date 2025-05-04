@@ -2,7 +2,12 @@ usr = [{'nome': 'john',
         'email': 'john@gmail.com',
         'senha' : '123'
         }]
-
+usr_carona=[{
+    'nome': 'john',
+    'local de partida': 'Cajazeiras',
+    'destino final': 'Joao pessoa',
+    'data' : '04/06/2025'
+}]
 
 op= 99
 
@@ -39,7 +44,13 @@ while op != 0:
                 for usuario_cada in usr:
                     if usuario_cada['email'] == email_val and usuario_cada['senha'] == senha_val:
                         print('login realizado com sucesso')
-                        # while op2 != 0:
+                        while op2 != 0:
+                            print('1-Cadastrar carona')
+                            print('2-Pegar carona')
+                            op2 = int(input('Digite a opção que você deseja: '))
+                            if op2 == 1:
+                                local_origin=input('digite o local de origem: ')
+                                local_final=input('digite o destino final: ')
                     else:
                         print('email e senha errado')
 
