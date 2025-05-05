@@ -23,19 +23,31 @@ while op != 0:
             nome = input('digite seu nome')
             email = input('digite o email valido')
             senha = input('digite sua senha')
+            email_exis = True
+            for email_exis in usr:
+                if email_exis['email'] == email:
+                    print('Email existente!')
+                    continue
+                else:
+                    email_exis = False
+                    break
 
-            if '@' in email and '.com' in email and '$' not in email and '%' not in email and '&' not in email and '#' not in email and ' ' not in email:
-                usr.append({
-                    'nome': nome,
-                    'email': email,
-                    'senha': senha
-                }
-                )
-                print('Usuario cadastrado com sucesso')
-                break
-            else:
-                print('email invalido por favor digite novamente o email e senha para validação')
-                continue
+            if email_exis == False:
+                if '@' in email and '.com' in email and '$' not in email and '%' not in email and '&' not in email and '#' not in email and ' ' not in email:
+                    usr.append({
+                        'nome': nome,
+                        'email': email,
+                        'senha': senha
+                            }
+                            )
+                    print('Usuario cadastrado com sucesso')
+                    break
+                else:
+                    print('email invalido por favor digite novamente o email e senha para validação')
+                    continue
+        if op == 24:
+            print(usr)
+            break
         if op == 2:
             while True:
                 op2 = 99
