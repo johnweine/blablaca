@@ -158,7 +158,7 @@ while op != '0':
                                         print(f"Valor por vaga: R${carona['valor por vaga']:.2f}")
                                         caronas_encontradas = True
 
-                            if caronas_encontradas:
+                            if not caronas_encontradas:
                                 print('\nNENHUMA CARONA ENCONTRADAD PARA ESSE DESTINO ESPECIFICO.')
                             print('-------------------------------------------------------')
 
