@@ -36,6 +36,18 @@ usr_carona = [{
      'passageiros': []
      }]
 
+carros = {
+    'black1': 'Mercedes-Benz S-Class',
+    'black2': 'BMW 7 Series',
+    'black3': 'Audi A8',
+    'premium1': 'Toyota Camry',
+    'premium2': 'Hyundai Sonata',
+    'premium3': 'Honda Accord',
+    'classic1': 'Celta',
+    'classic2': 'Mobi',
+    'classic3': 'Gol'
+}
+
 op = '99'
 usuario_logado = None
 
@@ -137,11 +149,29 @@ while op != '0':
                             break
                         elif ano % 4 != 0 and dia >= 1 and dia <= 28 and mes == 2:
                             break
+                        if 2025 >= ano <= 3000:
+                            break
                         else:
                             print('data invalida')
                             continue
                     horario = input('Digite o horário da carona (HH:MM): ')
-                    vagas = int(input('digite a quantidade de vagas: '))
+                    vagas = int(input('Digite a quantidade de vagas: '))
+                    detalhe = input('Digite o detalhe da viagem')
+                    classe = input('1-Black \n2-Premium \n3-Classic\nDigite qual classe da veiculo utilizado')
+                    if classe == '1':
+                        print(f'Carro 1-{carros["black1"]}')
+                        print(f'Carro 2-{carros["black2"]}')
+                        print(f'Carro 3-{carros["black3"]}')
+                        input()
+                    elif classe == '2':
+                        print(f'Carro 1-{carros["premium1"]}')
+                        print(f'Carro 2-{carros["premium2"]}')
+                        print(f'Carro 3-{carros["premium3"]}')
+                    elif classe == '3':
+                        print(f'Carro 1-{carros["classic1"]}')
+                        print(f'Carro 2-{carros["classic2"]}')
+                        print(f'Carro 3-{carros["classic3"]}')
+
                     if vagas < 0:
                         print('Vagas invalidas')
                     valor = float(input('digite o valor por vaga: '))
@@ -160,6 +190,7 @@ while op != '0':
                         'horario': horario,
                         'vagas': vagas,
                         'valor por vaga': valor,
+                        'detalhes': detalhe,
                         'passageiros': []
                     })
                     print('CARONA CADASTRADA COM SUCESSO!')
@@ -196,7 +227,7 @@ while op != '0':
 
                         pulo = input('Deseja reserva 1 vaga? Digite (S/N) ').upper()
 
-                elif op2 == '3':
+                elif op2 == '3':#Adicionar classe do carro
                     while True:
                         if len(usr_carona) > 1:
                             origem_busca = input('Digite a origem desejada: ').lower()
