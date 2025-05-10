@@ -22,7 +22,7 @@ usr_carona = [{
     'horario': '12',
     'vagas': 4,
     'valor por vaga': 200.0,
-    'passageiros':[]
+    'passageiros': []
 },
     {'nome': 'lorran',
      'local de partida': 'cz',
@@ -100,6 +100,7 @@ while op != '0':
     elif op == '2':  # usuario cadastrado
         op2 = '99'
         while op2 != '0':
+
             print('-------------------------------------------------------')
             print('--------------- TELA DE LOGIN BLABLACAR ---------------')
             print('-------------------------------------------------------')
@@ -142,7 +143,7 @@ while op != '0':
                         dia = int(input('digite o dia da carona '))
                         mes = int(input('digite o mes da carona '))
                         ano = int(input('digite o ano da carona'))
-                        if   31 >= dia >= 1 and mes in[1, 3, 5, 7, 8,10,12]:
+                        if 31 >= dia >= 1 and mes in [1, 3, 5, 7, 8, 10, 12]:
                             break
                         elif 30 >= dia >= 1 and mes in [4, 6, 9, 11]:
                             break
@@ -158,30 +159,62 @@ while op != '0':
                     horario = input('Digite o horário da carona (HH:MM): ')
                     vagas = int(input('Digite a quantidade de vagas: '))
                     detalhe = input('Digite o detalhe da viagem')
-                    classe = input('1-Black \n2-Premium \n3-Classic\nDigite qual classe da veiculo utilizado')
-                    if classe == '1':
-                        print(f'Carro 1-{carros[0]["black1"]}')
-                        print(f'Carro 2-{carros[0]["black2"]}')
-                        print(f'Carro 3-{carros[0]["black3"]}')
-                        input()
-                    elif classe == '2':
-                        print(f'Carro 1-{carros[0]["premium1"]}')
-                        print(f'Carro 2-{carros[0]["premium2"]}')
-                        print(f'Carro 3-{carros[0]["premium3"]}')
-                    elif classe == '3':
-                        print(f'Carro 1-{carros[0]["classic1"]}')
-                        print(f'Carro 2-{carros[0]["classic2"]}')
-                        print(f'Carro 3-{carros[0]["classic3"]}')
-                    elif classe == '4':
-                        print(f'Carro')
 
+                    print('\nESCOLHA A CLASSE DO VEICULO:')
+                    print('1 - Black (LUXO)')
+                    print('2 - Premium (CONFORTO)')
+                    print('3 - Classic (ECONOMICO)')
+                    print('4 - Outro')
+                    classe = input('DIGITE A CLASSE DESEJADA: ')
+
+                    modelo = ''
+                    if classe == '1':
+                        print('\nMODELOS DISPONIVEIS DA CLASSE BLACK:')
+                        print(f'1 - {carros[0]["black1"]}')
+                        print(f'2 - {carros[0]["black2"]}')
+                        print(f'3 - {carros[0]["black3"]}')
+                        modelo = input('DIGITE O NUMERO DO MODELO DESEJADO: ')
+                        if modelo == '1':
+                            modelo = carros[0]["black1"]
+                        elif modelo == '2':
+                            modelo = carros[0]["black2"]
+                        elif modelo == '3':
+                            modelo = carros[0]["black3"]
+
+                    elif classe == '2':
+                        print('\nMODELOS DISPONIVEIS DA CLASSE PREMIUM:')
+                        print(f'1 - {carros[0]["premium1"]}')
+                        print(f'2 - {carros[0]["premium2"]}')
+                        print(f'3 - {carros[0]["premium3"]}')
+                        modelo = input('DIGITE O NUMERO DO MODELO DESEJADO: ')
+                        if modelo == '1':
+                            modelo = carros[0]["premium1"]
+                        elif modelo == '2':
+                            modelo = carros[0]["premium2"]
+                        elif modelo == '3':
+                            modelo = carros[0]["premium3"]
+
+                    elif classe == '3':
+                        print('\nMODELOS DISPONIVEIS DA CLASSE CLASSIC:')
+                        print(f'1 - {carros[0]["classic1"]}')
+                        print(f'2 - {carros[0]["classic2"]}')
+                        print(f'3 - {carros[0]["classic3"]}')
+                        modelo = input('DIGITE O NUMERO DO MODELO DESEJADO: ')
+                        if modelo == '1':
+                            modelo = carros[0]["classic1"]
+                        elif modelo == '2':
+                            modelo = carros[0]["classic2"]
+                        elif modelo == '3':
+                            modelo = carros[0]["classic3"]
+
+                    elif classe == '4':
+                        modelo = input('DIGITE O MODELO DO VEICULO: ')
 
                     if vagas < 0:
                         print('Vagas invalidas')
                     valor = float(input('digite o valor por vaga: '))
                     if valor < 0:
                         print('Valor invalido')
-
 
                     usr_carona.append({
                         'nome': usuario_logado['nome'],
@@ -214,12 +247,12 @@ while op != '0':
                         print('TODAS AS CARONAS DISPONÍVEIS:')
                         for carona in usr_carona:
                             if carona['nome'] == usuario_logado['nome']:
-                                qtd =+ 1
+                                qtd = + 1
                                 continue
                             if qtd == 0:
                                 print(f"\nCARONA {i}:")
                                 print(
-                                    f"Motorista: {carona['nome']} \n Local de Partida: {carona['local de partida']} \n Destino Final: {carona['destino final']} \n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} \n Horário: {carona['horario']}:00 \n Vagas: {carona['vagas']} \n Valor por vaga: R${carona['valor por vaga']:.2f}")
+                                    f"Motorista: {carona['nome']}  \n Local de Partida: {carona['local de partida']} \n Destino Final: {carona['destino final']} \n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} \n Horário: {carona['horario']}:00 \n Vagas: {carona['vagas']} \n Valor por vaga: R${carona['valor por vaga']:.2f}")
                                 print('                                                       ')
                                 i += 1
 
@@ -231,22 +264,44 @@ while op != '0':
 
                         pulo = input('Deseja reserva 1 vaga? Digite (S/N) ').upper()
 
-                elif op2 == '3':#Adicionar classe do carro
+                elif op2 == '3':  # Adicionar classe do carro
                     while True:
                         if len(usr_carona) > 1:
-                            origem_busca = input('Digite a origem desejada: ').lower()
-                            destino_busca = input('Digite o destino desejado: ').lower()
+                            origem_busca = input('Digite a origem desejada: ')
+                            destino_busca = input('Digite o destino desejado: ')
+
+                            classe_modelo_de_carro = input('Deseja filtrar por classe do carro? (S/N): ')
+                            classe_filtro = None
+
+                            if classe_modelo_de_carro == 'S':
+                                print('\nESCOLHA A CLASSE DO VEICULO:')
+                                print('1 - Black (Luxo)')
+                                print('2 - Premium (Conforto)')
+                                print('3 - Classic (Econômico)')
+                                print('4 - Outro')
+                                classe_opcao = input('DIGITE A CLASSE DESEJADA: ')
+
+                                if classe_opcao == '1':
+                                    classe_filtro = 'Black'
+                                elif classe_opcao == '2':
+                                    classe_filtro = 'Premium'
+                                elif classe_opcao == '3':
+                                    classe_filtro = 'Classic'
+                                elif classe_opcao == '4':
+                                    classe_filtro = 'Outro'
 
                             caronas_encontradas = False
 
                             print('\nRESULTADOS DA BUSCA:')
                             print('-------------------------------------------------------')
                             for carona in usr_carona:
-                                if (origem_busca in carona['local de partida'] or destino_busca in carona['destino final'] and carona['vagas'] > 0):
+                                if (origem_busca in carona['local de partida'] or destino_busca in carona[
+                                    'destino final'] and carona['vagas'] > 0):
                                     print(
                                         f"Motorista: {carona['nome']} \n Local de Partida: {carona['local de partida']} \n Destino Final: {carona['destino final']} \n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} \n Horário: {carona['horario']} \n Vagas: {carona['vagas']} \n Valor por vaga: R${carona['valor por vaga']:.2f}")
                                     print('                                                       ')
                                     caronas_encontradas = True
+
 
 
 
@@ -261,7 +316,7 @@ while op != '0':
                             break
                         break
 
-                elif op2 == '4':#Reservar carona
+                elif op2 == '4':  # Reservar carona
                     if len(usr_carona) == 0:
                         print('-------------------------------------------------------')
                         print('              NENHUMA CARONA DISPONÍVEL               ')
@@ -271,7 +326,8 @@ while op != '0':
                         print('Caronas disponíveis:')
                         for carona in usr_carona:
                             if carona['vagas'] > 0:
-                                print(f"{i}. Motorista: {carona['nome']} - {carona['local de partida']} para {carona['destino final']} em {carona['dia']}/{carona['mes']}/{carona['ano']} às {carona['horario']}:00 \n {carona['vagas']} ")
+                                print(
+                                    f"{i}. Motorista: {carona['nome']} - {carona['local de partida']} para {carona['destino final']} em {carona['dia']}/{carona['mes']}/{carona['ano']} às {carona['horario']}:00 \n {carona['vagas']} ")
                                 i += 1
 
                         reserva = int(input('Escolha o número da carona que deseja reservar: '))
@@ -310,7 +366,7 @@ while op != '0':
     if op == '24':
         print(usr)
         break
-    if op =='69':
+    if op == '69':
         print(usr_carona)
     else:
         print('OPÇÃO INVALIDA')
