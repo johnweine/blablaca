@@ -36,7 +36,7 @@ usr_carona = [{
      'passageiros': []
      }]
 
-carros = {
+carros = [{
     'black1': 'Mercedes-Benz S-Class',
     'black2': 'BMW 7 Series',
     'black3': 'Audi A8',
@@ -45,8 +45,9 @@ carros = {
     'premium3': 'Honda Accord',
     'classic1': 'Celta',
     'classic2': 'Mobi',
-    'classic3': 'Gol'
-}
+    'classic3': 'Gol',
+    'outro': ''
+}]
 
 op = '99'
 usuario_logado = None
@@ -159,18 +160,21 @@ while op != '0':
                     detalhe = input('Digite o detalhe da viagem')
                     classe = input('1-Black \n2-Premium \n3-Classic\nDigite qual classe da veiculo utilizado')
                     if classe == '1':
-                        print(f'Carro 1-{carros["black1"]}')
-                        print(f'Carro 2-{carros["black2"]}')
-                        print(f'Carro 3-{carros["black3"]}')
+                        print(f'Carro 1-{carros[0]["black1"]}')
+                        print(f'Carro 2-{carros[0]["black2"]}')
+                        print(f'Carro 3-{carros[0]["black3"]}')
                         input()
                     elif classe == '2':
-                        print(f'Carro 1-{carros["premium1"]}')
-                        print(f'Carro 2-{carros["premium2"]}')
-                        print(f'Carro 3-{carros["premium3"]}')
+                        print(f'Carro 1-{carros[0]["premium1"]}')
+                        print(f'Carro 2-{carros[0]["premium2"]}')
+                        print(f'Carro 3-{carros[0]["premium3"]}')
                     elif classe == '3':
-                        print(f'Carro 1-{carros["classic1"]}')
-                        print(f'Carro 2-{carros["classic2"]}')
-                        print(f'Carro 3-{carros["classic3"]}')
+                        print(f'Carro 1-{carros[0]["classic1"]}')
+                        print(f'Carro 2-{carros[0]["classic2"]}')
+                        print(f'Carro 3-{carros[0]["classic3"]}')
+                    elif classe == '4':
+                        print(f'Carro')
+
 
                     if vagas < 0:
                         print('Vagas invalidas')
