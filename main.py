@@ -406,18 +406,11 @@ while op != '0':
                     op2 = '0'
                     usuario_logado = None
                     break
-                elif op2 == '200':
-                    print()
                 else:
                     print('OPÇÃO INVALIDA!')
 
-    elif op == '0':
+    elif op == '3':
         print('SAINDO DO SISTEMA ATE BREVE! ...')
-    elif op == '24':
-        print(usr)
-
-    elif op == '69':
-        print(usr_carona, len(usr_carona))
     else:
         print('OPÇÃO INVALIDA')
 
