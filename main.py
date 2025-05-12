@@ -14,17 +14,21 @@ usr = [{'nome': 'john',
 
 usr_carona = [{
     'nome': 'john',
+    'email': 'john@gmail.com',
     'local de partida': 'cz',
     'destino final': 'jp',
-    'dia': 4,
-    'mes': 6,
-    'ano': 2024,
+    'dia': '4',
+    'mes': '6',
+    'ano': '2025',
     'horario': '12',
     'vagas': 4,
     'valor por vaga': 200.0,
+    'modelo':'camaro amarelo',
+    'detalhe': 'Ira passar por sao ze',
     'passageiros': []
 },
     {'nome': 'lorran',
+     'email': 'lorran@.com',
      'local de partida': 'cz',
      'destino final': 'jp',
      'dia': '15',
@@ -33,6 +37,8 @@ usr_carona = [{
      'horario': '22',
      'vagas': 2,
      'valor por vaga': 225.0,
+     'detalhe': 'ira passar por triunfo',
+     'modelo': 'toyata SW4',
      'passageiros': []
      }]
 
@@ -129,7 +135,8 @@ while op != '0':
                 print('2-LISTAR TODAS AS CARONAS DISPONÍVEIS')
                 print('3-BUSCAR CARONA POR ORIGEM E DESTINO')
                 print('4-RESERVAR VAGA EM CARONA')
-                print('5-LOGOUT')
+                print('5-CANCELAR RESERVA')
+                print('6-LOGOUT')
                 print('                                                       ')
                 print('-------------------------------------------------------')
                 print('-------------------------------------------------------')
@@ -156,7 +163,7 @@ while op != '0':
                         else:
                             print('data invalida')
                             continue
-                    horario = input('Digite o horário da carona (HH:MM): ')
+                    horario = input('Digite o horário da carona (HH): ')
                     vagas = int(input('Digite a quantidade de vagas: '))
                     detalhe = input('Digite o detalhe da viagem')
 
@@ -167,7 +174,6 @@ while op != '0':
                     print('4 - Outro')
                     classe = input('DIGITE A CLASSE DESEJADA: ')
 
-                    modelo = ''
                     if classe == '1':
                         print('\nMODELOS DISPONIVEIS DA CLASSE BLACK:')
                         print(f'1 - {carros[0]["black1"]}')
@@ -227,7 +233,8 @@ while op != '0':
                         'horario': horario,
                         'vagas': vagas,
                         'valor por vaga': valor,
-                        'detalhes': detalhe,
+                        'detalhe': detalhe,
+                        'modelo': modelo,
                         'passageiros': []
                     })
                     print('CARONA CADASTRADA COM SUCESSO!')
@@ -237,11 +244,12 @@ while op != '0':
                     if len(usr_carona) == 0:  # Ver se ta vazia
                         print('                                                       ')
                         print('-------------------------------------------------------')
-                        print('--------- NENHUMA CARONA DISPONIVEL NO MOMENTO ---------')
+                        print('--------- NENHUMA CARONA DISPONIVEL NO MOMENTO---------')
                         print('-------------------------------------------------------')
                         print('                                                       ')
 
-                    elif len(usr_carona) > 0:
+
+                    else:
                         i = 1
                         qtd = 0
                         print('TODAS AS CARONAS DISPONÍVEIS:')
@@ -252,17 +260,17 @@ while op != '0':
                             if qtd == 0:
                                 print(f"\nCARONA {i}:")
                                 print(
-                                    f"Motorista: {carona['nome']}  \n Local de Partida: {carona['local de partida']} \n Destino Final: {carona['destino final']} \n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} \n Horário: {carona['horario']}:00 \n Vagas: {carona['vagas']} \n Valor por vaga: R${carona['valor por vaga']:.2f}")
+                                    f"Motorista: {carona['nome']}  \n Local de Partida: {carona['local de partida']} \n Destino Final: {carona['destino final']} \n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} \n Horário: {carona['horario']}:00 \n Vagas: {carona['vagas']} \n Valor por vaga: R${carona['valor por vaga']:.2f} \n Detalhe da viagem {carona['detalhe']} \n Modelo do carro {carona['modelo']}")
                                 print('                                                       ')
                                 i += 1
 
                             else:
                                 print(f"\nCARONA {i}:")
                                 print(
-                                    f"Motorista: {carona['nome']} \n Local de Partida: {carona['local de partida']} \n Destino Final: {carona['destino final']} \n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} \n Horário: {carona['horario']} \n Vagas: {carona['vagas']} \n Valor por vaga: R${carona['valor por vaga']:.2f}")
+                                    f"Motorista: {carona['nome']} \n Local de Partida: {carona['local de partida']} \n Destino Final: {carona['destino final']} \n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} \n Horário: {carona['horario']} \n Vagas: {carona['vagas']} \n Valor por vaga: R${carona['valor por vaga']:.2f} \n Detalhe da viagem {carona['detalhe']} \n Modelo do carro {carona['modelo']}")
                                 print('                                                       ')
+                                i += 1
 
-                        pulo = input('Deseja reserva 1 vaga? Digite (S/N) ').upper()
 
                 elif op2 == '3':  # Adicionar classe do carro
                     while True:
@@ -270,7 +278,7 @@ while op != '0':
                             origem_busca = input('Digite a origem desejada: ')
                             destino_busca = input('Digite o destino desejado: ')
 
-                            classe_modelo_de_carro = input('Deseja filtrar por classe do carro? (S/N): ')
+                            classe_modelo_de_carro = input('Deseja filtrar por classe do carro? (S/N): ').upper()
                             classe_filtro = None
 
                             if classe_modelo_de_carro == 'S':
@@ -298,7 +306,7 @@ while op != '0':
                                 if (origem_busca in carona['local de partida'] or destino_busca in carona[
                                     'destino final'] and carona['vagas'] > 0):
                                     print(
-                                        f"Motorista: {carona['nome']} \n Local de Partida: {carona['local de partida']} \n Destino Final: {carona['destino final']} \n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} \n Horário: {carona['horario']} \n Vagas: {carona['vagas']} \n Valor por vaga: R${carona['valor por vaga']:.2f}")
+                                        f"Motorista: {carona['nome']}  \n Local de Partida: {carona['local de partida']} \n Destino Final: {carona['destino final']} \n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} \n Horário: {carona['horario']}:00 \n Vagas: {carona['vagas']} \n Valor por vaga: R${carona['valor por vaga']:.2f} \n Detalhe da viagem {carona['detalhe']} \n Modelo do carro {carona['modelo']}")
                                     print('                                                       ')
                                     caronas_encontradas = True
 
@@ -322,51 +330,92 @@ while op != '0':
                         print('              NENHUMA CARONA DISPONÍVEL               ')
                         print('-------------------------------------------------------')
                     else:
-                        i = 1
-                        print('Caronas disponíveis:')
-                        for carona in usr_carona:
-                            if carona['vagas'] > 0:
-                                print(
-                                    f"{i}. Motorista: {carona['nome']} - {carona['local de partida']} para {carona['destino final']} em {carona['dia']}/{carona['mes']}/{carona['ano']} às {carona['horario']}:00 \n {carona['vagas']} ")
-                                i += 1
-
-                        reserva = int(input('Escolha o número da carona que deseja reservar: '))
-
-                        if reserva:
-                            escolha = reserva - 1
-                            if 0 <= escolha < len(usr_carona):
-                                carona = usr_carona[escolha]
+                        while True:
+                            i = 1
+                            print('Caronas disponíveis:')
+                            for carona in usr_carona:
                                 if carona['vagas'] > 0:
-                                    if usuario_logado['nome'] in carona['passageiros']:
-                                        print('Você já reservou uma vaga nesta carona!')
+                                    print(
+                                        f"{i}. Motorista: {carona['nome']} - {carona['local de partida']} para {carona['destino final']} em {carona['dia']}/{carona['mes']}/{carona['ano']} às {carona['horario']}:00 \n Numero de vagas: {carona['vagas']} \n Detalhe da Viagem: {carona['detalhe']} Modelo:{carona['modelo']} ")
+                                    i += 1
+                                    print()
+                            reserva = int(input('Escolha o número da carona que deseja reservar: (caso deseja voltar digite 0). '))
+
+                            if reserva:
+                                reserva -= 1
+                                if 1 <= reserva < len(usr_carona):
+                                    carona = usr_carona[reserva]
+                                    if carona['vagas'] > 0:
+                                        if usuario_logado['email'] in carona['passageiros']:
+                                            print('Você já reservou uma vaga nesta carona!')
+                                        elif usuario_logado['email'] == carona['email']:
+                                            print('Você não pode reservar 1 vaga sendo o motorista')
+                                        else:
+                                            carona['vagas'] -= 1
+                                            carona['passageiros'].append(usuario_logado['email'])
+                                            print('Vaga reservada com sucesso!')
+                                            break
                                     else:
-                                        carona['vagas'] -= 1
-                                        carona['passageiros'].append(usuario_logado['nome'])
-                                        print('Vaga reservada com sucesso!')
+                                        print('Não há vagas disponíveis nesta carona.')
                                 else:
-                                    print('Não há vagas disponíveis nesta carona.')
+                                    print('Número de carona inválido!')
+                            elif reserva == 0:
+                                print('RETORNANDO PARA PAGINA INICIAL')
+                                break
                             else:
-                                print('Número de carona inválido!')
-                        else:
-                            print('Por favor, digite um número válido.')
-
-
+                                print('Por favor, digite um número válido.')
                 elif op2 == '5':
+                    if len(usr_carona) == 0:  # Ver se ta vazia
+                        print('                                                       ')
+                        print('-------------------------------------------------------')
+                        print('--------- NENHUMA CARONA DISPONIVEL NO MOMENTO---------')
+                        print('-------------------------------------------------------')
+                        print('                                                       ')
+                    else:
+                        print('SUAS RESERVAS')
+                        i = 1
+                        reservas_carona = []
+                        for carona in usr_carona:
+                            if usuario_logado['email'] in carona['passageiros']:
+                                reservas_carona.append(carona)
+                                print(
+                                    f'{i}. Motorista: {carona['nome']} - {carona['local de partida']} para {carona['destino final']} em {carona['dia']}/{carona['mes']}/{carona['ano']} às {carona['horario']}:00 \n Numero de vagas: {carona['vagas']} \n Detalhe da Viagem: {carona['detalhe']} Modelo:{carona['modelo']}')
+                                i += 1
+                        if reservas_carona:
+                            num_cancelar = int(input('Digite o numero da vaga que voce deseja cancelar'))
+                        else:
+                            print('Você nao possui nenhuma carona cadastrada!')
+
+
+
+                        if 0 <= num_cancelar <= len(reservas_carona):
+                            carona = reservas_carona[num_cancelar - 1]
+                            carona['passageiros'].remove(usuario_logado['email'])
+                            carona['vagas'] +=1
+                            print('\nSua reserva foi cancelada com sucesso\n')
+                        else:
+                            print('digite o numero da vaga correta')
+                            continue
+
+                elif op2 == '6':
                     print('                             ')
                     print('SAINDO DO MENU DE CARONAS ... ')
                     print('                             ')
                     op2 = '0'
                     usuario_logado = None
+                    break
+                elif op2 == '200':
+                    print()
                 else:
                     print('OPÇÃO INVALIDA!')
 
     elif op == '0':
         print('SAINDO DO SISTEMA ATE BREVE! ...')
-
-    if op == '24':
+    elif op == '24':
         print(usr)
-        break
-    if op == '69':
-        print(usr_carona)
+
+    elif op == '69':
+        print(usr_carona, len(usr_carona))
     else:
         print('OPÇÃO INVALIDA')
+
