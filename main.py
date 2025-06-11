@@ -1,3 +1,6 @@
+import os
+from utils import *
+
 usr = [{'nome': 'john',
         'email': 'john@gmail.com',
         'senha': '123'
@@ -59,20 +62,8 @@ op = '99'
 usuario_logado = None
 
 while op != '0':
-    print('-------------------------------------------------------')
-    print('------------------ MENU PRINCIPAL ---------------------')
-    print('--------------------- BLABLACA ------------------------')
-    print('-------------------------------------------------------')
-    print('                                                       ')
-    print('1-CADASTRA USUARIO ')
-    print('2-LOGIN')
-    print('3-SAIR')
-    print('                                                       ')
-    print('-------------------------------------------------------')
-    print('-------------------------------------------------------')
-    print('                                                       ')
+    menu_principal('MENU PRINCIPAL')
     op = (input('DIGITE A OPÇÃO DESEJADA - '))
-    print('                                                       ')
 
     if op == '1':
         while True:
