@@ -65,7 +65,8 @@ usuario_logado = None
 while op != '0':
     menu_principal('MENU PRINCIPAL')
     op = (input('DIGITE A OPÇÃO DESEJADA - '))
-    limpar_terminal()
+
+
     if op == '1':
         while True:
             nome = input('DIGITE SEU NOME: ')
@@ -137,35 +138,25 @@ while op != '0':
                         dia = int(input('digite o dia da carona '))
                         mes = int(input('digite o mes da carona '))
                         ano = int(input('digite o ano da carona'))
-                        if 31 >= dia >= 1 and mes in [1, 3, 5, 7, 8, 10, 12]:
-                            break
-                        elif 30 >= dia >= 1 and mes in [4, 6, 9, 11]:
-                            break
-                        elif ano % 4 == 0 and dia >= 1 and dia <= 29 and mes == 2:
-                            break
-                        elif ano % 4 != 0 and dia >= 1 and dia <= 28 and mes == 2:
-                            break
-                        elif 2025 >= ano <= 3000:
+                        if verificar_data(ano, mes, dia):
                             break
                         else:
-                            print('data invalida')
+                            print('Data invalida')
+
+                    while True:
+                        horario = input('Digite o horário da carona (HH:MM): ')
+                        if verificar_horario(horario):
+                            break
+                        else:
+                            print('Digite o horario no formato HH:MM')
                             continue
-                    horario = input('Digite o horário da carona (HH): ')
                     vagas = int(input('Digite a quantidade de vagas: '))
                     detalhe = input('Digite o detalhe da viagem')
-
-                    print('\nESCOLHA A CLASSE DO VEICULO:')
-                    print('1 - Black (LUXO)')
-                    print('2 - Premium (CONFORTO)')
-                    print('3 - Classic (ECONOMICO)')
-                    print('4 - Outro')
+                    classe_carros()
                     classe = input('DIGITE A CLASSE DESEJADA: ')
 
                     if classe == '1':
-                        print('\nMODELOS DISPONIVEIS DA CLASSE BLACK:')
-                        print(f'1 - {carros[0]["black1"]}')
-                        print(f'2 - {carros[0]["black2"]}')
-                        print(f'3 - {carros[0]["black3"]}')
+                        carros_black(carros)
                         modelo = input('DIGITE O NUMERO DO MODELO DESEJADO: ')
                         if modelo == '1':
                             modelo = carros[0]["black1"]
@@ -175,10 +166,7 @@ while op != '0':
                             modelo = carros[0]["black3"]
 
                     elif classe == '2':
-                        print('\nMODELOS DISPONIVEIS DA CLASSE PREMIUM:')
-                        print(f'1 - {carros[0]["premium1"]}')
-                        print(f'2 - {carros[0]["premium2"]}')
-                        print(f'3 - {carros[0]["premium3"]}')
+                        carros_premium(carros)
                         modelo = input('DIGITE O NUMERO DO MODELO DESEJADO: ')
                         if modelo == '1':
                             modelo = carros[0]["premium1"]
@@ -188,10 +176,7 @@ while op != '0':
                             modelo = carros[0]["premium3"]
 
                     elif classe == '3':
-                        print('\nMODELOS DISPONIVEIS DA CLASSE CLASSIC:')
-                        print(f'1 - {carros[0]["classic1"]}')
-                        print(f'2 - {carros[0]["classic2"]}')
-                        print(f'3 - {carros[0]["classic3"]}')
+                        carros_classic(carros)
                         modelo = input('DIGITE O NUMERO DO MODELO DESEJADO: ')
                         if modelo == '1':
                             modelo = carros[0]["classic1"]
@@ -229,12 +214,7 @@ while op != '0':
 
                 elif op2 == '2':
                     if len(usr_carona) == 0:
-                        print('                                                       ')
-                        print('-------------------------------------------------------')
-                        print('--------- NENHUMA CARONA DISPONIVEL NO MOMENTO---------')
-                        print('-------------------------------------------------------')
-                        print('                                                       ')
-
+                       falta_carona()
 
                     else:
                         i = 1
@@ -305,17 +285,12 @@ while op != '0':
                             print('-------------------------------------------------------')
                             break
                         else:
-                            print('-------------------------------------------------------')
-                            print('              NENHUM CADASTRO NO MOMENTO              ')
-                            print('-------------------------------------------------------')
-                            break
-                        break
+                            falta_carona()
+
 
                 elif op2 == '4':
                     if len(usr_carona) == 0:
-                        print('-------------------------------------------------------')
-                        print('              NENHUMA CARONA DISPONÍVEL               ')
-                        print('-------------------------------------------------------')
+                        falta_carona()
                     else:
                         while True:
                             i = 1
@@ -355,11 +330,7 @@ while op != '0':
                 elif op2 == '5':
                     while True:
                         if len(usr_carona) == 0:
-                            print('                                                       ')
-                            print('-------------------------------------------------------')
-                            print('--------- NENHUMA CARONA DISPONIVEL NO MOMENTO---------')
-                            print('-------------------------------------------------------')
-                            print('                                                       ')
+                            falta_carona()
                         else:
                             print('SUAS RESERVAS')
                             i = 1
