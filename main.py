@@ -1,6 +1,7 @@
 import os
 from utils import *
 
+
 usr = [{'nome': 'john',
         'email': 'john@gmail.com',
         'senha': '123'
@@ -64,26 +65,19 @@ usuario_logado = None
 while op != '0':
     menu_principal('MENU PRINCIPAL')
     op = (input('DIGITE A OPÇÃO DESEJADA - '))
-
+    limpar_terminal()
     if op == '1':
         while True:
             nome = input('DIGITE SEU NOME: ')
             email = input('DIGITE O EMAIL VALIDO: ')
             senha = input('DIGITE SUA SENHA: ')
-
-
-            email_existente = False
-            for usuario in usr:
-                if usuario['email'] == email:
-                    email_existente = True
-                    break
-
-            if email_existente:
+            if not verificar_email_exist(email,usr):
                 print('Email já cadastrado!')
                 continue
-
-
-            if '@' in email and '.com' in email and '$' not in email and '%' not in email and '&' not in email and '#' not in email and ' ' not in email and '/' not in email and '?' not in email:
+            elif not requisito_email(email):
+                print('Email inválido! Por favor digite novamente.')
+                continue
+            elif requisito_email(email):
                 usr.append({
                     'nome': nome,
                     'email': email,
@@ -93,6 +87,8 @@ while op != '0':
                 break
             else:
                 print('Email inválido! Por favor digite novamente.')
+
+
 
     elif op == '2':
         op2 = '99'
@@ -149,7 +145,7 @@ while op != '0':
                             break
                         elif ano % 4 != 0 and dia >= 1 and dia <= 28 and mes == 2:
                             break
-                        if 2025 >= ano <= 3000:
+                        elif 2025 >= ano <= 3000:
                             break
                         else:
                             print('data invalida')
@@ -399,9 +395,9 @@ while op != '0':
                     break
                 else:
                     print('OPÇÃO INVALIDA!')
-
+    elif op == '69':
+        print(usr)
     elif op == '3':
         print('SAINDO DO SISTEMA ATE BREVE! ...')
     else:
         print('OPÇÃO INVALIDA')
-
