@@ -135,9 +135,9 @@ while op != '0':
                     local_origin = input('digite o local de origem: ')
                     local_final = input('digite o destino final: ')
                     while True:
-                        dia = int(input('digite o dia da carona '))
-                        mes = int(input('digite o mes da carona '))
-                        ano = int(input('digite o ano da carona'))
+                        dia = int(input('digite o dia da carona: '))
+                        mes = int(input('digite o mes da carona: '))
+                        ano = int(input('digite o ano da carona: '))
                         if verificar_data(ano, mes, dia):
                             break
                         else:
@@ -148,10 +148,10 @@ while op != '0':
                         if verificar_horario(horario):
                             break
                         else:
-                            print('Digite o horario no formato HH:MM')
+                            print('O horario tem que ser no formato HH:MM')
                             continue
                     vagas = int(input('Digite a quantidade de vagas: '))
-                    detalhe = input('Digite o detalhe da viagem')
+                    detalhe = input('Digite o detalhe da viagem: ')
                     classe_carros()
                     classe = input('DIGITE A CLASSE DESEJADA: ')
 
@@ -217,7 +217,6 @@ while op != '0':
                        falta_carona()
 
                     else:
-                        i = 1
                         qtd = 0
                         print('TODAS AS CARONAS DISPONÍVEIS:')
                         for carona in usr_carona:
@@ -225,18 +224,11 @@ while op != '0':
                                 qtd = + 1
                                 continue
                             if qtd == 0:
-                                print(f"\nCARONA {i}:")
-                                print(
-                                    f"Motorista: {carona['nome']}  \n Local de Partida: {carona['local de partida']} \n Destino Final: {carona['destino final']} \n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} \n Horário: {carona['horario']}:00 \n Vagas: {carona['vagas']} \n Valor por vaga: R${carona['valor por vaga']:.2f} \n Detalhe da viagem {carona['detalhe']} \n Modelo do carro {carona['modelo']}")
-                                print('                                                       ')
-                                i += 1
-
+                                caronas_disponioveis(carona)
                             else:
-                                print(f"\nCARONA {i}:")
-                                print(
-                                    f"Motorista: {carona['nome']} \n Local de Partida: {carona['local de partida']} \n Destino Final: {carona['destino final']} \n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} \n Horário: {carona['horario']} \n Vagas: {carona['vagas']} \n Valor por vaga: R${carona['valor por vaga']:.2f} \n Detalhe da viagem {carona['detalhe']} \n Modelo do carro {carona['modelo']}")
-                                print('                                                       ')
-                                i += 1
+                                caronas_disponioveis(carona)
+
+
 
 
                 elif op2 == '3':
@@ -267,6 +259,9 @@ while op != '0':
 
                             caronas_encontradas = False
 
+
+
+
                             print('\nRESULTADOS DA BUSCA:')
                             print('-------------------------------------------------------')
                             for carona in usr_carona:
@@ -277,16 +272,12 @@ while op != '0':
                                     print('                                                       ')
                                     caronas_encontradas = True
 
-
-
-
-                        elif not caronas_encontradas:
-                            print('\nNENHUMA CARONA ENCONTRADAD PARA ESSE DESTINO ESPECIFICO.')
-                            print('-------------------------------------------------------')
-                            break
-                        else:
-                            falta_carona()
-
+                                elif not caronas_encontradas:
+                                    print('\nNENHUMA CARONA ENCONTRADAD PARA ESSE DESTINO ESPECIFICO.')
+                                    print('-------------------------------------------------------')
+                                else:
+                                    falta_carona()
+                        break
 
                 elif op2 == '4':
                     if len(usr_carona) == 0:
@@ -370,5 +361,6 @@ while op != '0':
         print(usr)
     elif op == '3':
         print('SAINDO DO SISTEMA ATE BREVE! ...')
+        break
     else:
         print('OPÇÃO INVALIDA')

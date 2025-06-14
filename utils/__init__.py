@@ -80,6 +80,24 @@ def carros_classic(carros):
     print(f'2 - {carros[0]["classic2"]}')
     print(f'3 - {carros[0]["classic3"]}')
 
+
+
+def caronas_disponioveis(carona):
+    i=1
+    print(f"\nCARONA {i}:")
+    print(
+        f"Motorista: {carona['nome']}  "
+        f"\n Local de Partida: {carona['local de partida']} "
+        f"\n Destino Final: {carona['destino final']} "
+        f"\n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} "
+        f"\n Horário: {carona['horario']}:00 \n Vagas: {carona['vagas']} "
+        f"\n Valor por vaga: R${carona['valor por vaga']:.2f} "
+        f"\n Detalhe da viagem:  {carona['detalhe']} "
+        f"\n Modelo do carro: {carona['modelo']}")
+    print('                                                       ')
+    i += 1
+
+
 def falta_carona():
     print('                                                       ')
     print('-------------------------------------------------------')
