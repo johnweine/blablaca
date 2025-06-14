@@ -124,7 +124,8 @@ while op != '0':
                 print('3-BUSCAR CARONA POR ORIGEM E DESTINO')
                 print('4-RESERVAR VAGA EM CARONA')
                 print('5-CANCELAR RESERVA')
-                print('6-LOGOUT')
+                print('6-DETALHES DAS CLASSES')
+                print('7-LOGOUT')
                 print('                                                       ')
                 print('-------------------------------------------------------')
                 print('-------------------------------------------------------')
@@ -217,6 +218,7 @@ while op != '0':
                        falta_carona()
 
                     else:
+                        i = 1
                         qtd = 0
                         print('TODAS AS CARONAS DISPONÍVEIS:')
                         for carona in usr_carona:
@@ -224,12 +226,12 @@ while op != '0':
                                 qtd = + 1
                                 continue
                             if qtd == 0:
-                                caronas_disponioveis(carona)
+                                caronas_disponioveis(carona, i)
+                                i += 1
                             else:
-                                caronas_disponioveis(carona)
-
-
-
+                                caronas_disponioveis(carona, i)
+                                i += 1
+                        continuar()
 
                 elif op2 == '3':
                     while True:
@@ -241,11 +243,7 @@ while op != '0':
                             classe_filtro = None
 
                             if classe_modelo_de_carro == 'S':
-                                print('\nESCOLHA A CLASSE DO VEICULO:')
-                                print('1 - Black (Luxo)')
-                                print('2 - Premium (Conforto)')
-                                print('3 - Classic (Econômico)')
-                                print('4 - Outro')
+                                classe_carros()
                                 classe_opcao = input('DIGITE A CLASSE DESEJADA: ')
 
                                 if classe_opcao == '1':
@@ -267,9 +265,7 @@ while op != '0':
                             for carona in usr_carona:
                                 if (origem_busca in carona['local de partida'] or destino_busca in carona[
                                     'destino final'] and carona['vagas'] > 0):
-                                    print(
-                                        f"Motorista: {carona['nome']}  \n Local de Partida: {carona['local de partida']} \n Destino Final: {carona['destino final']} \n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} \n Horário: {carona['horario']}:00 \n Vagas: {carona['vagas']} \n Valor por vaga: R${carona['valor por vaga']:.2f} \n Detalhe da viagem {carona['detalhe']} \n Modelo do carro {carona['modelo']}")
-                                    print('                                                       ')
+                                    caronas_disponioveis(carona)
                                     caronas_encontradas = True
 
                                 elif not caronas_encontradas:
@@ -347,8 +343,21 @@ while op != '0':
                                 print('\nSua reserva foi cancelada com sucesso\n')
                                 break
 
-
                 elif op2 == '6':
+                    print('Na Classe Black (LUXO) terá um aumento de 40% no valor!\n ')
+                    print('Esse são os modelos de carros Black disponiveis.\n')
+                    linhas()
+                    print('\n1-Mercedes-Benz S-Class \n2-BMW 7 Series \n3-Audi A8')
+                    linhas()
+                    print('Na Classe Premiun (CONFORTO) terá um aumento de 20% no valor!\n')
+                    print('Esse são os modelos de carros premiun')
+                    linhas()
+                    print('\n1-Toyota Camry \n2-Hyundai Sonata\n3-Honda Accord')
+                    continuar()
+
+
+
+                elif op2 == '7':
                     print('                             ')
                     print('SAINDO DO MENU DE CARONAS ... ')
                     print('                             ')

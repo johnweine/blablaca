@@ -82,8 +82,7 @@ def carros_classic(carros):
 
 
 
-def caronas_disponioveis(carona):
-    i=1
+def caronas_disponioveis(carona, i):
     print(f"\nCARONA {i}:")
     print(
         f"Motorista: {carona['nome']}  "
@@ -95,7 +94,9 @@ def caronas_disponioveis(carona):
         f"\n Detalhe da viagem:  {carona['detalhe']} "
         f"\n Modelo do carro: {carona['modelo']}")
     print('                                                       ')
-    i += 1
+
+def continuar():
+    kk = input('Para voltar pressione ENTER')
 
 
 def falta_carona():
