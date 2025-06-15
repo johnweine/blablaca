@@ -25,9 +25,13 @@ def verificar_email_exist(email, usr):
 
 
 def requisito_email(email):
-    if '@' in email and '.com' in email and '$' not in email and '%' not in email and '&' not in email and '#' not in email and ' ' not in email and '/' not in email and '?' not in email:
-        return True
-    return False
+    naopode = ['$', '%', '&', '#', ' ', '/', '?']
+    if '@' not in email or not email.endswith('.com'):
+        return False
+    for caracteres in naopode:
+        if caracteres in email:
+            return False
+    return True
 
 def verificar_data(ano, mes, dia):
     if not 2025 <= ano <= 3000:

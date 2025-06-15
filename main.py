@@ -1,4 +1,4 @@
-import os
+
 from utils import *
 
 
@@ -65,6 +65,7 @@ usuario_logado = None
 while op != '0':
     menu_principal('MENU PRINCIPAL')
     op = (input('DIGITE A OPÇÃO DESEJADA - '))
+    limpar_terminal()
 
 
     if op == '1':
@@ -85,6 +86,7 @@ while op != '0':
                     'senha': senha,
                 })
                 print('---- USUARIO CADASTRADO COM SUCESSO ----')
+                limpar_terminal()
                 break
             else:
                 print('Email inválido! Por favor digite novamente.')
@@ -105,6 +107,7 @@ while op != '0':
             for usuario_cada in usr:
                 if usuario_cada['email'] == email and usuario_cada['senha'] == senha:
                     usuario_logado = usuario_cada
+                    limpar_terminal()
                     print('LOGIN REALIZADO COM SUCESSO')
                     print('  ')
                     break
@@ -133,6 +136,7 @@ while op != '0':
                 op2 = input('DIGITE A OPÇÃO DESEJADA - ')
 
                 if op2 == '1':
+                    limpar_terminal()
                     local_origin = input('digite o local de origem: ')
                     local_final = input('digite o destino final: ')
                     while True:
@@ -152,6 +156,8 @@ while op != '0':
                             print('O horario tem que ser no formato HH:MM')
                             continue
                     vagas = int(input('Digite a quantidade de vagas: '))
+                    if vagas < 0 :
+                        continue
                     detalhe = input('Digite o detalhe da viagem: ')
                     classe_carros()
                     classe = input('DIGITE A CLASSE DESEJADA: ')
@@ -210,6 +216,7 @@ while op != '0':
                         'modelo': modelo,
                         'passageiros': []
                     })
+                    limpar_terminal()
                     print('CARONA CADASTRADA COM SUCESSO!')
                     print('              ')
 
@@ -232,6 +239,7 @@ while op != '0':
                                 caronas_disponioveis(carona, i)
                                 i += 1
                         continuar()
+                        limpar_terminal()
 
                 elif op2 == '3':
                     while True:
@@ -255,24 +263,22 @@ while op != '0':
                                 elif classe_opcao == '4':
                                     classe_filtro = 'Outro'
 
-                            caronas_encontradas = False
-
-
-
 
                             print('\nRESULTADOS DA BUSCA:')
                             print('-------------------------------------------------------')
                             for carona in usr_carona:
                                 if (origem_busca in carona['local de partida'] or destino_busca in carona[
                                     'destino final'] and carona['vagas'] > 0):
-                                    caronas_disponioveis(carona)
-                                    caronas_encontradas = True
+                                    i = 1
+                                    caronas_disponioveis(carona, i)
+                                    i += 1
 
-                                elif not caronas_encontradas:
-                                    print('\nNENHUMA CARONA ENCONTRADAD PARA ESSE DESTINO ESPECIFICO.')
-                                    print('-------------------------------------------------------')
                                 else:
-                                    falta_carona()
+                                    linhas()
+                                    print('\nNENHUMA CARONA ENCONTRADAD PARA ESSE DESTINO ESPECIFICO.')
+                                    linhas()
+                        continuar()
+                        limpar_terminal()
                         break
 
                 elif op2 == '4':
@@ -302,6 +308,7 @@ while op != '0':
                                         else:
                                             carona['vagas'] -= 1
                                             carona['passageiros'].append(usuario_logado['email'])
+                                            limpar_terminal()
                                             print('Vaga reservada com sucesso!')
                                             break
                                     else:
@@ -309,6 +316,7 @@ while op != '0':
                                 else:
                                     print('Número de carona inválido!')
                             elif reserva == 0:
+                                limpar_terminal()
                                 print('RETORNANDO PARA PAGINA INICIAL')
                                 break
                             else:
@@ -340,10 +348,12 @@ while op != '0':
                                 carona = reservas_carona[num_cancelar - 1]
                                 carona['passageiros'].remove(usuario_logado['email'])
                                 carona['vagas'] +=1
+                                limpar_terminal()
                                 print('\nSua reserva foi cancelada com sucesso\n')
                                 break
 
                 elif op2 == '6':
+                    limpar_terminal()
                     print('Na Classe Black (LUXO) terá um aumento de 40% no valor!\n ')
                     print('Esse são os modelos de carros Black disponiveis.\n')
                     linhas()
@@ -358,9 +368,8 @@ while op != '0':
 
 
                 elif op2 == '7':
-                    print('                             ')
-                    print('SAINDO DO MENU DE CARONAS ... ')
-                    print('                             ')
+                    limpar_terminal()
+                    print('\nSAINDO DO MENU DE CARONAS ... \n')
                     op2 = '0'
                     usuario_logado = None
                     break
