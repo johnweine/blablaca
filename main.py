@@ -125,8 +125,7 @@ while op != '0':
                 print('3-BUSCAR CARONA POR ORIGEM E DESTINO')
                 print('4-RESERVAR VAGA EM CARONA')
                 print('5-CANCELAR RESERVA')
-                print('6-DETALHES DAS CLASSES')
-                print('7-LOGOUT\n')
+                print('6-LOGOUT\n')
                 print('-------------------------------------------------------')
                 print('-------------------------------------------------------')
 
@@ -235,9 +234,32 @@ while op != '0':
                             else:
                                 caronas_disponioveis(carona, i)
                                 i += 1
-                        relatorio = input('Deseja criar 1 arquivo txt ')
-                        continuar()
-                        limpar_terminal()
+                        relatorio = input('Deseja criar 1 arquivo txt com as informações? (S/N): ').upper()
+                        if relatorio == 'S':
+                            relatorio = f'{usuario_logado['nome']}.txt'
+                            txt = open(relatorio, 'w')
+                            txt.write(f'Relatorio de Caronas - Usuario: {usuario_logado['nome'].upper()}\n')
+
+                            i = 1
+                            for carona in usr_carona:
+                                if carona['nome'] == usuario_logado['nome']:
+                                    txt.write(f"Motorista: {carona['nome']}  ")
+                                    txt.write(f"\n Local de Partida: {carona['local de partida']} ")
+                                    txt.write(f"\n Destino Final: {carona['destino final']} ")
+                                    txt.write(f"\n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} ")
+                                    txt.write(f"\n Horário: {carona['horario']} \n Vagas: {carona['vagas']} ")
+                                    txt.write(f"\n Valor por vaga: R${carona['valor por vaga']:.2f} ")
+                                    txt.write(f"\n Detalhe da viagem:  {carona['detalhe']} ")
+                                    txt.write(f"\n Modelo do carro: {carona['modelo']}")
+                                    txt.write(f'\n  Total de caronas disponiveis: {carona['vagas']}\n')
+                            txt.close()
+                            limpar_terminal()
+                            print(f'Relatorio salvo como {relatorio.upper()}.\n')
+
+                        elif relatorio == 'N':
+                            limpar_terminal()
+                            continuar()
+
 
                 elif op2 == '3':
                     while True:
@@ -245,41 +267,26 @@ while op != '0':
                             origem_busca = input('Digite a origem desejada: ')
                             destino_busca = input('Digite o destino desejado: ')
 
-                            classe_modelo_de_carro = input('Deseja filtrar por classe do carro? (S/N): ').upper()
-                            classe_filtro = None
-
-                            if classe_modelo_de_carro == 'S':
-                                classe_carros()
-                                classe_opcao = input('DIGITE A CLASSE DESEJADA: ')
-
-                                if classe_opcao == '1':
-                                    classe_filtro = 'Black'
-                                elif classe_opcao == '2':
-                                    classe_filtro = 'Premium'
-                                elif classe_opcao == '3':
-                                    classe_filtro = 'Classic'
-                                elif classe_opcao == '4':
-                                    classe_filtro = 'Outro'
-
-
                             print('\nRESULTADOS DA BUSCA:')
                             print('-------------------------------------------------------')
+                            i = 1
                             for carona in usr_carona:
-                                if (origem_busca in carona['local de partida'] or destino_busca in carona[
-                                    'destino final'] and carona['vagas'] > 0):
-                                    i = 1
+                                if (origem_busca in carona['local de partida'] or destino_busca in carona['destino final'] and carona['vagas'] > 0):
                                     caronas_disponioveis(carona, i)
                                     i += 1
-
                                 else:
+                                    limpar_terminal()
                                     linhas()
-                                    print('\nNENHUMA CARONA ENCONTRADAD PARA ESSE DESTINO ESPECIFICO.')
+                                    print('NENHUMA CARONA ENCONTRADAD PARA ESSE DESTINO ESPECIFICO.')
                                     linhas()
+                                    break
+
                         continuar()
                         limpar_terminal()
                         break
 
                 elif op2 == '4':
+                    limpar_terminal()
                     if len(usr_carona) == 0:
                         falta_carona()
                     else:
@@ -288,10 +295,8 @@ while op != '0':
                             print('Caronas disponíveis:')
                             for carona in usr_carona:
                                 if carona['vagas'] > 0:
-                                    print(
-                                        f"{i}. Motorista: {carona['nome']} - {carona['local de partida']} para {carona['destino final']} em {carona['dia']}/{carona['mes']}/{carona['ano']} às {carona['horario']}:00 \n Numero de vagas: {carona['vagas']} \n Detalhe da Viagem: {carona['detalhe']} Modelo:{carona['modelo']} ")
+                                    caronas_disponioveis(carona, i)
                                     i += 1
-                                    print()
                             reserva = int(input('Escolha o número da carona que deseja reservar: (caso deseja voltar digite 0). '))
 
                             if reserva:
@@ -300,8 +305,10 @@ while op != '0':
                                     carona = usr_carona[reserva]
                                     if carona['vagas'] > 0:
                                         if usuario_logado['email'] in carona['passageiros']:
+                                            limpar_terminal()
                                             print('Você já reservou uma vaga nesta carona!')
                                         elif usuario_logado['email'] == carona['email']:
+                                            limpar_terminal()
                                             print('Você não pode reservar 1 vaga sendo o motorista')
                                         else:
                                             carona['vagas'] -= 1
@@ -312,6 +319,7 @@ while op != '0':
                                     else:
                                         print('Não há vagas disponíveis nesta carona.')
                                 else:
+                                    limpar_terminal()
                                     print('Número de carona inválido!')
                             elif reserva == 0:
                                 limpar_terminal()
@@ -325,6 +333,7 @@ while op != '0':
                         if len(usr_carona) == 0:
                             falta_carona()
                         else:
+                            limpar_terminal()
                             print('SUAS RESERVAS')
                             i = 1
                             reservas_carona = []
@@ -348,23 +357,7 @@ while op != '0':
                                 limpar_terminal()
                                 print('\nSua reserva foi cancelada com sucesso\n')
                                 break
-
                 elif op2 == '6':
-                    limpar_terminal()
-                    print('Na Classe Black (LUXO) terá um aumento de 40% no valor!\n ')
-                    print('Esse são os modelos de carros Black disponiveis.\n')
-                    linhas()
-                    print('\n1-Mercedes-Benz S-Class \n2-BMW 7 Series \n3-Audi A8')
-                    linhas()
-                    print('Na Classe Premiun (CONFORTO) terá um aumento de 20% no valor!\n')
-                    print('Esse são os modelos de carros premiun')
-                    linhas()
-                    print('\n1-Toyota Camry \n2-Hyundai Sonata\n3-Honda Accord')
-                    continuar()
-
-
-
-                elif op2 == '7':
                     limpar_terminal()
                     print('\nSAINDO DO MENU DE CARONAS ... \n')
                     op2 = '0'
@@ -372,11 +365,9 @@ while op != '0':
                     break
                 else:
                     print('OPÇÃO INVALIDA!')
-    elif op == '69':
-        print(usr)
-
     elif op == '3':
         print('SAINDO DO SISTEMA ATE BREVE! ...')
         break
     else:
         print('OPÇÃO INVALIDA')
+#
