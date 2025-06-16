@@ -102,6 +102,26 @@ def salvar_usuario(nome, email, senha):
     txt.write(f'\nNome: {nome}\n Email: {email}\n Senha: {senha}')
     txt.close()
 
+def salvar_relatorio(caronas, usuario_logado):
+    relatorio = f'{usuario_logado['nome']}.txt'
+    txt = open(relatorio, 'w')
+    txt.write(f'Relatorio de Caronas - Usuario: {usuario_logado['nome'.upper()]}\n')
+
+
+    i = 1
+    for carona in caronas:
+        txt.write(f"Motorista: {carona['nome']}  ")
+        txt.write(f"\n Local de Partida: {carona['local de partida']} ")
+        txt.write(f"\n Destino Final: {carona['destino final']} ")
+        txt.write(f"\n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} ")
+        txt.write(f"\n Horário: {carona['horario']} \n Vagas: {carona['vagas']} ")
+        txt.write(f"\n Valor por vaga: R${carona['valor por vaga']:.2f} ")
+        txt.write(f"\n Detalhe da viagem:  {carona['detalhe']} ")
+        txt.write(f"\n Modelo do carro: {carona['modelo']}")
+    txt.write(f'\n  Total de caronas disponiveis: {len(caronas)}')
+    txt.close()
+    print(f'Relatorio salvo como {relatorio}.')
+
 def continuar():
     kk = input('Para voltar pressione ENTER')
 
@@ -112,7 +132,7 @@ def falta_carona():
     print('--------- NENHUMA CARONA CADASTRADA--------------------')
     print('-------------------------------------------------------')
     print('                                                       ')
-
+#
 
 def limpar_terminal():
     os.system('cls')
