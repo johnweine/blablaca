@@ -85,8 +85,9 @@ while op != '0':
                     'email': email,
                     'senha': senha,
                 })
-                print('---- USUARIO CADASTRADO COM SUCESSO ----')
                 limpar_terminal()
+                print('---- USUARIO CADASTRADO COM SUCESSO ----')
+                salvar_usuario(nome, email, senha)
                 break
             else:
                 print('Email inválido! Por favor digite novamente.')
@@ -99,8 +100,7 @@ while op != '0':
 
             print('-------------------------------------------------------')
             print('--------------- TELA DE LOGIN BLABLACAR ---------------')
-            print('-------------------------------------------------------')
-            print('    ')
+            print('-------------------------------------------------------\n')
             email = input('EMAIL: ')
             senha = input('SENHA: ')
 
@@ -108,8 +108,7 @@ while op != '0':
                 if usuario_cada['email'] == email and usuario_cada['senha'] == senha:
                     usuario_logado = usuario_cada
                     limpar_terminal()
-                    print('LOGIN REALIZADO COM SUCESSO')
-                    print('  ')
+                    print('LOGIN REALIZADO COM SUCESSO\n')
                     break
 
             else:
@@ -119,8 +118,7 @@ while op != '0':
                 print('-------------------------------------------------------')
                 print('-------------- MENU DE CARONAS E CADASTRO -------------')
                 print('----------------------DE CARONAS-----------------------')
-                print('-------------------------------------------------------')
-                print('                                                       ')
+                print('-------------------------------------------------------\n')
                 print(f'BEM VINDO: {usuario_logado['nome'].upper()}')
                 print('\n1-CADASTRAR CARONA')
                 print('2-LISTAR TODAS AS CARONAS DISPONÍVEIS')
@@ -128,8 +126,7 @@ while op != '0':
                 print('4-RESERVAR VAGA EM CARONA')
                 print('5-CANCELAR RESERVA')
                 print('6-DETALHES DAS CLASSES')
-                print('7-LOGOUT')
-                print('                                                       ')
+                print('7-LOGOUT\n')
                 print('-------------------------------------------------------')
                 print('-------------------------------------------------------')
 
@@ -238,6 +235,7 @@ while op != '0':
                             else:
                                 caronas_disponioveis(carona, i)
                                 i += 1
+                        relatorio = input('Deseja criar 1 arquivo txt ')
                         continuar()
                         limpar_terminal()
 
@@ -333,8 +331,7 @@ while op != '0':
                             for carona in usr_carona:
                                 if usuario_logado['email'] in carona['passageiros']:
                                     reservas_carona.append(carona)
-                                    print(
-                                        f'{i}. Motorista: {carona['nome']} - {carona['local de partida']} para {carona['destino final']} em {carona['dia']}/{carona['mes']}/{carona['ano']} às {carona['horario']}:00 \n Numero de vagas: {carona['vagas']} \n Detalhe da Viagem: {carona['detalhe']} Modelo:{carona['modelo']}')
+                                    caronas_disponioveis(carona, i)
                                     i += 1
                             if reservas_carona:
                                 num_cancelar = int(input('Digite o numero da vaga que voce deseja cancelar: '))
@@ -377,6 +374,7 @@ while op != '0':
                     print('OPÇÃO INVALIDA!')
     elif op == '69':
         print(usr)
+
     elif op == '3':
         print('SAINDO DO SISTEMA ATE BREVE! ...')
         break

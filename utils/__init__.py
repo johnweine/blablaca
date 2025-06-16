@@ -1,14 +1,13 @@
 import os
 
-
 def linhas():
     print('-' * 30)
 
 
 def menu_principal(menu):
     linhas()
-    print('-'*15, menu, '-'*15)
-    print('-'*15, 'BLABLACA', '-'*15)
+    print('-'*5, menu,'---------')
+    print('-------BLABLACA---------------')
     linhas()
     print('1-CADASTRA USUARIO ')
     print('2-LOGIN')
@@ -93,12 +92,32 @@ def caronas_disponioveis(carona, i):
         f"\n Local de Partida: {carona['local de partida']} "
         f"\n Destino Final: {carona['destino final']} "
         f"\n Data: {carona['dia']} / {carona['mes']} / {carona['ano']} "
-        f"\n Horário: {carona['horario']}:00 \n Vagas: {carona['vagas']} "
+        f"\n Horário: {carona['horario']} \n Vagas: {carona['vagas']} "
         f"\n Valor por vaga: R${carona['valor por vaga']:.2f} "
         f"\n Detalhe da viagem:  {carona['detalhe']} "
         f"\n Modelo do carro: {carona['modelo']}")
-    print('                                                       ')
 
+def salvar_usuario(nome, email, senha):
+    txt = open('usuario.txt', 'a')
+    txt.write(f'\nNome: {nome}\n Email: {email}\n Senha: {senha}')
+    txt.close()
+
+# def importar_usuarios():
+#     importando = []
+#     txt = open('importar.txt', 'r')
+#     linhas = txt.readlines()
+#     txt.close()
+#
+#     for linha in linhas:
+#         if linha:
+#             info = linha.split(';')
+#             if len(info) == 3:
+#                 importando.append({
+#                     'nome': importando[0],
+#                     'email': importando[1],
+#                     'senha': importando[2]
+#                 })
+#     return importando
 def continuar():
     kk = input('Para voltar pressione ENTER')
 
