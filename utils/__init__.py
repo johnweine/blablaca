@@ -102,22 +102,6 @@ def salvar_usuario(nome, email, senha):
     txt.write(f'\nNome: {nome}\n Email: {email}\n Senha: {senha}')
     txt.close()
 
-# def importar_usuarios():
-#     importando = []
-#     txt = open('importar.txt', 'r')
-#     linhas = txt.readlines()
-#     txt.close()
-#
-#     for linha in linhas:
-#         if linha:
-#             info = linha.split(';')
-#             if len(info) == 3:
-#                 importando.append({
-#                     'nome': importando[0],
-#                     'email': importando[1],
-#                     'senha': importando[2]
-#                 })
-#     return importando
 def continuar():
     kk = input('Para voltar pressione ENTER')
 
